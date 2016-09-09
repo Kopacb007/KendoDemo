@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.1.0.js" integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=" crossorigin="anonymous"></script>
+        <script src="js/kendo.web.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/kendo.common.min.css">
+        <link rel="stylesheet" type="text/css" href="css/kendo.metro.min.css">        
+    </head>
+    <body>
+        <div id="inline">
+            
+        </div>
+
+        <script id="scriptTemplate" type="text/x-kendo-template">
+            Hello #=firstName# #=lastName# !
+        </script>
+
+        <script>
+            var inlineObject = {firstName: "John", lastName: "Smith"};
+            var inlineTemplate = kendo.template($('#scriptTemplate').html());
+            $("#inline").html(inlineTemplate(inlineObject));
+        </script>
+
+
+        <!--<table id="netflixTable">
+            <thead>
+                <tr>
+                    <td>
+                        Image
+                    </td>
+                    <td>
+                        Title
+                    </td>
+                    <td>
+                        Rating
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="3"></td>
+                </tr>
+            </tbody>
+        </table>-->
+
+        <div id="netflixTable">
+            
+        </div>
+
+        <style>
+            .rowColor:nth-child(even)
+            {
+                background: whiteSmoke;
+            }
+            .rowColor:nth-child(odd)
+            {
+                background: #c0c0c0;
+            }
+        </style>
+
+        <script id="rowTemplate" type="text/x-kendo-tmpl">
+            <tr class="rowColor">
+                <td>
+                    ${ UserName }
+                </td>
+                <td>
+                    ${ FirstName }
+                </td>
+                <td>
+                    ${ LastName }
+                </td>
+            </tr>
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                var users = 
+                [
+                    {
+                    UserName:  "russellwhite",
+                    FirstName: "Russell",
+                    LastName:  "White"
+                    },
+                    {
+                    UserName:  "F",
+                    FirstName: "g",
+                    LastName:  "White"
+                    },
+                    {
+                    UserName:  "H",
+                    FirstName: "U",
+                    LastName:  "White"
+                    }
+                ];
+                var data = {
+                    dataSource: {
+                        data: users,
+                        schema: {
+                            model: {
+                                fields: {
+                                    UserName:  { type: "string"},
+                                    FirstName: { type: "string"},
+                                    LastName:  { type:  "string"}
+                                }
+                            }
+                        }
+                        // type: "odata",
+                        // transport: {
+                        //     read: "http://odata.netflix.com/Catalog/Titles"
+                        // }
+                    },
+                    rowTemplate: kendo.template($('#rowTemplate').html()),
+                    height: 500,
+                    columns: [
+                            "User Name",
+                            "First Name",
+                            "Last Name"
+                        ]
+                }
+                $('#netflixTable').kendoGrid(data);
+            });
+        </script>
+    </body>
+</html>
